@@ -1,0 +1,33 @@
+# Evidence guide: where proof lives in a reproduction package
+
+In eval mode use only the frozen bundle: Issue, Thread highlights, Repo facts, Candidate claim comment and Candidate repro report. Never fetch the source issue or infer facts from other packages. In live mode read the issue body and relevant thread, the repository's issue template and CONTRIBUTING/AI policy, and the supplied drafts. Read scope.md for live house rules. Working-directory files do not count as posted evidence unless their relevant content is included in the drafts.
+
+## Environment
+
+**Where it lives:** In eval, the Issue supplies the reporter's target, Repo facts supplies requested environment fields, and Candidate repro report supplies the tested environment. In live, compare the issue's environment and repository bug template with the draft's environment record and included version/configuration output.
+
+**What good looks like:** The report identifies the tested release or commit and OS/platform, plus issue-relevant runtime/dependency versions, installation method, settings and build profile. Differences from the reporter's setup are explicit; testing a newer release or different OS can pass when the difference is acknowledged and the conclusions stay within the tested setup. Do not derive an OS or build profile solely from a panic message or claim that all environments behave alike.
+
+## Steps
+
+**Where it lives:** In eval, read the repro report's preparation, embedded input/configuration, commands or UI sequence and artifacts against the Issue's trigger. In live, use those same parts of the draft; inspect repository instructions only to understand normal setup, not to silently fill missing candidate proof.
+
+**What good looks like:** A reader can recreate the initial state and perform the trigger, including relevant versions/settings, fixture contents, commands, flags and UI actions. An inline one-command reproduction can suffice. A described fixture can suffice when a stranger can construct a minimal equivalent without guessing behavior-relevant details; for example, a valid dependencies list plus an unrecognized category section locates the relevant conda warning trigger. Exact bytes matter for syntax-sensitive failures. Supplementary run summaries need not include every command when the principal evidenced attempt is repeatable. “Run my script,” “use the attached config” with no accessible content, and “set up the project” when special setup matters leave consequential gaps. Do not demand irrelevant tooling tutorials or a fixed number of steps.
+
+## Behavior shown
+
+**Where it lives:** In eval, compare the Issue's described symptom and expected behavior with the repro report's output excerpts, logs, screenshots described in the bundle, before/after state or concrete UI observation record. In live, read the draft's embedded or accessible linked artifacts together with the triggering actions. A path to a student's local screenshot or log is not accessible issue-thread evidence.
+
+**What good looks like:** Identify the distinguishing symptom: panic versus syntax rejection, silent no-op versus a visible warning, overflow versus an unrelated startup failure. Verify that the posted input and trigger actually reach that behavior. For example, calib-03 changes `intdict = { 1 = {} }` to `intdict = { 1: {} }`: the latter yields a missing-separator parse error, not the reported `panic: not a string`. The issue version is 4.53.2 and the candidate version is 4.53.3; an acknowledged version change alone does not invalidate evidence. Repeating the wrong failure many times does not reproduce the issue. Concrete UI observations can be evidence without terminal output; “same here” cannot. For cannot-reproduce, look for a relevant concrete attempt, tested environment, observed results and explicit limitations. The author may have been unable to achieve a suspected trigger condition (such as asymmetric argument-buffer flushing or a different shell's logical PWD); that is a useful limited finding if disclosed. Do not turn it into a claim the bug is absent. A successful unrelated control alone is insufficient.
+
+## Honesty
+
+**Where it lives:** In eval, compare assertions in both candidate comments and the repro report's analysis, expected/actual and conclusion with its environment, input, steps and artifacts. In live, make the same comparison inside the draft pair, not against unposted work the student says exists elsewhere.
+
+**What good looks like:** The status accurately says reproduced, cannot reproduce in the stated setup, or encountered a different failure. Evidence supports the claimed scope; guesses about root cause are labeled hypotheses rather than established facts. Do not turn a cannot-reproduce into rejection merely because it does not confirm the reporter, or into proof that the bug never exists. A plausible cause from the reporter is not independent verification; a representative artifact may back a stated summary of repeated runs, without one log per run. Extra platform or fix claims need concrete backing when used to establish broader conclusions. Do not substitute guessed implementation behavior for the bundle evidence when judging qualified hypotheses.
+
+## Comms
+
+**Where it lives:** In eval, read Candidate claim comment against Issue and Thread highlights, then both comments against Repo facts' bug-report asks and contribution/AI policy. In live, read the issue thread, .github issue templates (or linked reporting instructions), CONTRIBUTING.md and any linked AI policy, then the draft comments. Apply the scoped house rules; in Path Review, another classmate's claim or reproduction does not block the student's independent contribution.
+
+**What good looks like:** The claim names a concrete issue behavior and a bounded next action, and the report gives its result without pressure or unsupported promises. Relevant template information must be present, but identical template headings are unnecessary. A follow-up reproduction comment may summarize diagnostic facts rather than repeat full diagnostic dumps or the initial issue-filing workflow, when the environment and artifacts already substantiate the result. This does not waive an explicit AI disclosure requirement. Read AI disclosure requirements literally: if required, the disclosure must explain the use to the degree requested, rather than rely on a vague thank-you. Do not invent a disclosure obligation where the frozen/live policy states none, or apply a PR-only restriction to an issue report. Respect an existing fix effort by offering useful testing rather than asserting exclusive ownership. Personal voice rules are checked separately in live mode and do not independently change this rubric's verdict.
