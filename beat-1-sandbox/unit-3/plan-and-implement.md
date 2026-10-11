@@ -1,28 +1,21 @@
-# Unit 3 — Plan and Build
+# Plan and implement
 
-## Posted upstream
-
-**GitHub username**
+## GitHub username
 
 qingtaozhou
 
-**Plan comment**
+## Plan comment
 
-Pending: the posted comment permalink and exact text have not been
-provided. No unposted draft is presented as a posted comment.
+Pending: posted comment URL and exact posted text have not been provided.
+`comment-draft.md` is an unposted draft, not evidence of a posted comment.
 
-## Your branch
-
-**Branch**
+## Branch
 
 `fix/68-empty-keyword-index`
 
-https://github.com/qingtaozhou/pathreview-ai301-fa26-s3/tree/fix/68-empty-keyword-index
+Fork: https://github.com/qingtaozhou/pathreview-ai301-fa26-s3
 
-Commit: `7fe5de7`. Only the implementation and tests are committed;
-plan.md and comment.md remain untracked in the fork clone.
-
-**Evidence**
+## Evidence
 
 # Before and after: issue #68
 
@@ -196,50 +189,34 @@ tests/unit/test_keyword_search.py::TestKeywordSearcher::test_single_word_chunks 
 Exit code: 0
 ```
 
-## Eval iterations
+## Run history
 
-**Run history**
+The first full eval attempt errored on all 20 packages because Claude
+was not logged in. The harness saved no eval-run.txt. Later login
+checks also failed. No successful or passing eval run is claimed.
 
-The first full harness attempt errored on all 20 packages: Claude was
-not logged in. Its displayed agreement was `0/0 scored items`, not a
-valid scored run. The harness did not save eval-run.txt. Later login
-checks also failed. A successful full run and its actual agreement score
-are still required; the existing eval-run.txt scaffold is not a result.
+## Package analysis
 
-**Package analysis**
+Manual calibration review: calib-03's pager diagnosis contradicts the
+slow no-pager highlighting control. Diagnosis therefore compares the
+cause to reproduction controls rather than merely asking whether a
+cause is stated. calib-01 has a concrete refresh callback change and
+a decisive manual check, so automated tests are not mandatory.
+No scored-package disagreement analysis is available before a run.
 
-Manual rubric application to scored package `pkg-01`: reject; the gold
-label is reject. This is a manual analysis, not a completed harness run.
-The package's Repro evidence says:
+## Check rationale
 
-> `--debug` on the failing run shows the error is raised by argparse's `parse_args` while consuming positionals; the request items are never handed to HTTPie's item parser.
+Diagnosis prevents fixes based on contradicted causes. Scope prevents
+unrelated expansion. Executability requires a concrete starting point.
+Test plan requires observable verification of the reproduced failure.
+Honesty keeps claims within evidence. Comms checks the actual comment
+against maintainer direction and repository policies.
 
-The plan instead says:
+## Trade-offs
 
-> The `REQUEST_ITEM` tokenizer in `httpie/cli/requestitems.py` is the problem.
-
-Diagnosis fails because a tokenizer change cannot address an error
-that occurs before that tokenizer receives the items. The no-flag
-control also shows those item strings already parse successfully.
-
-**Check rationale**
-
-Exact current Diagnosis row from tools/plan-check/rubric.md:
-
-| Diagnosis | Candidate plan's cause and approach, compared with Issue, Thread highlights, and Repro evidence (including controls, timings, and artifacts). | The proposed cause explains the reproduced failure and relevant controls without contradicting them. The change addresses that cause rather than merely hiding the symptom. A thread claim alone does not outweigh contrary reproduction evidence. | required |
-
-The worksheet's sample passed any plan that named a cause. I replaced
-that condition with a comparison against reproduction results and
-controls so a specific but contradicted explanation cannot pass.
-This rejects the pager explanation in calib-03 and the tokenizer
-explanation in pkg-01. Naming a source file alone is not proof.
-
-**Trade-offs**
-
-Manual verification is allowed when it repeats the original trigger
-and specifies an observable expected result. This avoids rejecting
-calib-01 solely because it has no automated test. Required unclear
-checks hold the package, which can delay a sound plan whose evidence
-is missing. The rubric does not require exact filenames when concrete
-areas suffice. No successful full eval or canary run is claimed, so
-these choices still require harness validation.
+Every required check must pass; unclear evidence holds the package.
+This favors verifiable readiness over accepting unverifiable plans.
+Manual tests can pass when they reproduce the trigger and name a
+clear expected result. Exact filenames and document headings are not
+universal requirements. The blank-text nonempty-corpus case is outside
+this fix. These choices have not yet been validated by a full eval run.
