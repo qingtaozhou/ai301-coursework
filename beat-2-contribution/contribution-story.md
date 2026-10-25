@@ -55,10 +55,9 @@ happened; these entries are the toolkit's own timeline.
 All four entries are graded. Keep every heading below, and fill each
 one in the week it belongs to.
 
-**Unit 5: [one line on the tool work]**
+**Unit 5: Built the issue-scout search strategy, then fixed it after the first scan only turned up issues someone already had**
 
-[2-4 sentences: what you built (the scout, your strategy), what broke
-or fell short, what changed because of it.]
+On 2026-10-25 I wrote three `gh search issues` queries from my Python data-tools fit profile, with ranking filters (drop assigned or stale issues, then order by repo tier and comment count), and ran a scan that graded the top 5. All five were rejected on Available work: each already had open PRs or a fresh claim, and 4 of the 5 came from holoviz/lumen, because ranking by comment count can't see PRs that reference an issue (lumen#2237 had 0 comments and 2 open PRs). I added `-linked:pr` to every query, which in a test dropped 4 of the 5 taken issues, and capped the top 5 at two per repo. I also patched my rubric's contribution-policy check to look in the org-level `.github` repo, because lumen's AI-disclosure rule lives there, not in the repo itself.
 
 **Unit 6: [one line on the tool work]**
 
